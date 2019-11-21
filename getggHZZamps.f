@@ -27,12 +27,12 @@ c---
       real(dp):: p(mxpart,4),mb2,mt2
       complex(dp):: Mloop_bquark(2,2,2,2),Mloop_tquark(2,2,2,2),
      & ggHmt(2,2),ggHmb(2,2),C0mt,C0mb,prop12,prop34,prop56,
-     & H4l(2,2),sinthw,higgsprop
+     & H4l(2,2),sinthw,higgsprop,delZn, cr
       real(dp):: rescale 
 
 !==== for width studies rescale by appropriate factor 
       if((keep_smhiggs_norm).and.(anom_higgs)) then 
-         rescale=chi_higgs**2 
+         rescale=chi_higgs**2
       else
          rescale=1._dp
       endif
@@ -47,6 +47,8 @@ c--- squared masses and sin(thetaw)
       mb2=mb**2
       sinthw=sqrt(xw)
       
+c--- DelZn Correction
+      cr = (delZn/2)**2
       
 c--- propagator factors
       prop12=higgsprop(s(1,2))
@@ -83,8 +85,8 @@ c--- Assemble: insert factor of (im) here
       do h1=1,2
       do h34=1,2
       do h56=1,2
-      Mloop_bquark(h1,h1,h34,h56)=im*ggHmb(h1,h1)*H4l(h34,h56)*prop12
-      Mloop_tquark(h1,h1,h34,h56)=im*ggHmt(h1,h1)*H4l(h34,h56)*prop12
+      Mloop_bquark(h1,h1,h34,h56)=im*ggHmb(h1,h1)*H4l(h34,h56)*prop12*cr
+      Mloop_tquark(h1,h1,h34,h56)=im*ggHmt(h1,h1)*H4l(h34,h56)*prop12*cr
       enddo
       enddo
       enddo
@@ -100,6 +102,10 @@ c--- Rescale for width study
       enddo
       enddo
       
+c--- Delta Zn for vertex 
+
+
+
       return
       end
       
