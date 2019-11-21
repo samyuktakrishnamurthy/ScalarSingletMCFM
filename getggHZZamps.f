@@ -49,11 +49,7 @@ c--- squared masses and sin(thetaw)
       
       
 c--- propagator factors
-c---  prop12=higgsprop(s(1,2))
-
-c--- Edited the propagator here to include the renormalized self energy
- 
-      prop12 = higgsprop(s(1,2))+ higgsprop(s(1,2))*
+      prop12=higgsprop(s(1,2))
       prop34=cone/cplx2(s(3,4)-zmass**2,zmass*zwidth)
       prop56=cone/cplx2(s(5,6)-zmass**2,zmass*zwidth)
 
